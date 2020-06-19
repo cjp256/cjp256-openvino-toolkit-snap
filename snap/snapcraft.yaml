@@ -29,8 +29,10 @@ parts:
     build-environment:
       - OpenCV_DIR: $SNAPCRAFT_STAGE/opencv
       - PATH: /usr/lib/ccache:$PATH
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
       snapcraftctl set-version "$(git describe --tags --always)"
+    override-build: |
       pip3 install Cython
       cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/openvino -DTHREADING=SEQ -DENABLE_PYTHON=ON -DPYTHON_EXECUTABLE=/usr/bin/python3.6 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6 -DCYTHON_EXECUTABLE=$(which cython) -DTREAT_WARNING_AS_ERROR=OFF $SNAPCRAFT_PART_SRC
       cmake --build . -- -j"${SNAPCRAFT_PARALLEL_BUILD_COUNT}"
