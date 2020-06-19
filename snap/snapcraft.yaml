@@ -23,7 +23,7 @@ parts:
       - build-essential
       - libssl-dev
   openvino:
-    source: git://github.com/openvinotoolkit/openvino
+    source: https://github.com/openvinotoolkit/openvino
     source-branch: "releases/2020/4"
     plugin: cmake
     build-environment:
@@ -58,7 +58,7 @@ parts:
       - wget
     after: [opencv, cmake]
   opencv:
-    source: git://github.com/opencv/opencv
+    source: https://github.com/opencv/opencv
     plugin: cmake
     build-environment:
       - PATH: /usr/lib/ccache:$PATH
